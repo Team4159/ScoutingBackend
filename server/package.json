@@ -1,0 +1,18 @@
+{
+  "name": "scouting-server",
+  "version": "1.0.0",
+  "description": "Server to submit data into.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "FRC Team 4159 CardinalBotics (Brandon L)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "ip": "^1.1.4",
+    "readline": "^1.3.0"
+  }
+}
