@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ScoutManager</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body style="background-color:#f6f0e8">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div id="reader" style="width:300px;height:250px"></div>
+        <div id="message"></div>
+        <div id="manual">
+          <form name="manualCSV">
+            Manual Input:<br>
+            <textarea id="manualCSVData" rows="2" cols="50"></textarea><br>
+            <input id="saveManual" type="button" value="Save">
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div id="save">
+          <form name="manualCSV">
+            File name:<br>
+            <input id="fileName" type="text">.csv
+            <input id="saveFile" type="button" value="Save">
+          </form>
+        </div>
+        <h3>Recently Scanned</h3>
+        <ul id="logs"></ul>
+      </div>
+    </div>
+  </div>
+  <script src='qrDecoder.js'></script>
+  <script src='main.js'></script>
+</body>
+</html>
