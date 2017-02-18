@@ -1,24 +1,25 @@
 {
   "name": "ScoutManager",
   "version": "1.0.0",
-  "description": "Scan match data from CardinalScout",
+  "description": "Manages scanning QRs from CardinalScout app",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Team4159/CardinalScoutBackend-2017.git"
+    "url": "git+https://github.com/Team4159/ScoutingBackend.git"
   },
   "author": "Brandon L",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Team4159/CardinalScoutBackend-2017/issues"
+    "url": "https://github.com/Team4159/ScoutingBackend/issues"
   },
-  "homepage": "https://github.com/Team4159/CardinalScoutBackend-2017#readme",
+  "homepage": "https://github.com/Team4159/ScoutingBackend#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "electron": "^1.4.15",
-    "jquery": "^3.1.1",
-    "qrcode-reader": "^0.2.2"
+    "fs": "0.0.1-security",
+    "jquery": "^3.1.1"
   }
 }
