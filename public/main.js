@@ -30,6 +30,10 @@ $('#saveFile').click( () => {
   if(file != ".csv") {
     var stream = fs.createWriteStream("./data/" + file);
     stream.once('open', function(fd) {
+
+      // csv template
+      stream.write("match,team, autonGears,autonBallsLow,autonBallsHigh,cross,teleopGears,teleopBallsHigh,teleopBallsLow,touchpad,climb,deadtime,comments\n");
+
       for(var i = 0; i < csvData.length; i++) {
         stream.write(csvData[i] + "\n");
       }
