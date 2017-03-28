@@ -1,52 +1,73 @@
 const $ = require('jquery');
 const fs = require('fs');
-var csvData = [];
+const app = require('electron').remote;
+const dialog = app.dialog;
+const prependFile = require('prepend-file');
 
-$('#reader').html5_qrcode(function(data){
-    if(csvData.length == 0 || data != csvData[csvData.length-1]) {
-      csvData.push(data);
+var csvTemplate = "match,team,autonGears,autonBallsLow,autonBallsHigh,cross,teleopGears,teleopBallsHigh,teleopBallsLow,touchpad,climb,deadtime,comments\n";
+var fileName = "";
+var tempCSV = [];
+
+$('#reader').html5_qrcode(
+  (data) => {
+    if(data != tempCSV[tempCSV.length-1] && fileName != "") {
+      tempCSV.push(data);
+      save(data);
       $('#logs').prepend("<li>" + data + "</li>");
+      infoMessage("Scanned: " + data);
     }
-    $('#message').html("<p style='color:green'>Scanned: " + data + "</p>");
-  },
-  function(error){
-    $('#message').html("<p style='color:red'>" + error + "</p>");
-  }, function(videoError){
-    $('#message').html("<p style='color:red'>" + videoError + "</p>");
+  }, (error) => {
+    errorMessage(error);
+  }, (videoError) => {
+    errorMessage(videoError);
   }
 );
 
 $('#saveManual').click( () => {
   var manualData = $('#manualCSVData').val();
-  if(manualData != "") {
-    csvData.push(manualData);
+  if(manualData != "" && manualData != tempCSV[tempCSV.length-1] && fileName != "") {
+    tempCSV.push(manualData);
+    save(manualData);
     $('#logs').prepend("<li>" + manualData + "</li>");
     $('#manualCSVData').val("");
   }
 });
 
-$('#saveFile').click( () => {
-  var file = $('#fileName').val() + ".csv";
-  if(file != ".csv") {
-    var stream = fs.createWriteStream("./data/" + file);
-    stream.once('open', function(fd) {
-
-      // csv template
-      stream.write("match,team, autonGears,autonBallsLow,autonBallsHigh,cross,teleopGears,teleopBallsHigh,teleopBallsLow,touchpad,climb,deadtime,comments\n");
-
-      for(var i = 0; i < csvData.length; i++) {
-        stream.write(csvData[i] + "\n");
-      }
-      stream.end();
-      alert("Saved to " + file);
-      csvData = [];
-      $('#logs').html('');
-      $('#fileName').val('');
-    });
-  }
+$('#chooseFile').click( () => {
+  dialog.showOpenDialog(
+    {filters:[{name:'csv',extensions:['csv']}]},
+    (fileNames) => {
+    // fileNames is an array that contains all the selected
+   if(fileNames === undefined) errorMessage("Did not select a new file");
+   else {
+     fileName = fileNames[0];
+     const fd = fs.openSync(fileName, 'r+')
+     fs.writeSync(fd, csvTemplate, 0, csvTemplate.length, 0)
+     fs.close(fd)
+     $('#currentFileName').html("<p>Saving to: " + fileName + "</p>");
+   };
+  });
 });
 
 $('body').keypress( (event) => {
   if (event.keyCode === 10 || event.keyCode === 13)
     event.preventDefault();
 });
+
+const save = (data) => {
+  if(fileName == "") {
+    errorMessage("Select a file first.");
+  } else {
+    fs.appendFile(fileName, data+"\n", (err) => {
+      if (err) errorMessage(err);
+    });
+  }
+}
+
+const infoMessage = (m) => {
+  $('#message').html("<p style='color:green'>" + m + "</p>");
+}
+
+const errorMessage = (e) => {
+  $('#message').html("<p style='color:red'>" + e + "</p>");
+}

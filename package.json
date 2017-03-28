@@ -1,8 +1,8 @@
 {
-  "name": "ScoutManager",
-  "productName": "ScoutManager",
+  "name": "CardinalScoutManager",
+  "productName": "CardinalScoutManager",
   "version": "1.0.0",
-  "description": "Manages scanning QRs from CardinalScout app",
+  "description": "QR scans from CardinalScout app and saves to CSV",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -16,12 +16,13 @@
   "bugs": {
     "url": "https://github.com/Team4159/ScoutingBackend/issues"
   },
-  "homepage": "https://github.com/Team4159/ScoutingBackend#readme",
+  "homepage": "https://github.com/Team4159/ScoutingBackend",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "electron": "^1.4.15",
     "fs": "0.0.1-security",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "prepend-file": "^1.3.1"
   },
   "devDependencies": {
     "electron": "^1.4.15",

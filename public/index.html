@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>ScoutManager</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>CardinalScoutManager</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
 </head>
+
 <body style="background-color:#f6f0e8">
   <div class="container">
     <div class="row">
+
       <div class="col-sm-6">
         <div id="reader" style="width:300px;height:250px"></div>
         <div id="message"></div>
@@ -18,21 +21,23 @@
             <input id="saveManual" type="button" value="Save">
           </form>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div id="save">
-          <form name="manualCSV">
-            File name:<br>
-            <input id="fileName" type="text">.csv
-            <input id="saveFile" type="button" value="Save">
-          </form>
+        <br><br>
+        <div id="saveFile">
+          <div id="currentFileName"></div>
+          <input id="chooseFile" type="button" value="Select CSV File">
         </div>
+      </div>
+
+      <div class="col-sm-6">
         <h3>Recently Scanned</h3>
         <ul id="logs"></ul>
       </div>
+
     </div>
   </div>
+
   <script src='qrDecoder.js'></script>
   <script src='main.js'></script>
+
 </body>
 </html>

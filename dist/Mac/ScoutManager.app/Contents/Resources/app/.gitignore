@@ -1,7 +1,0 @@
-# npm stuff
-node_modules
-npm-debug.log
-
-# csv
-data/*
-!data/placeholder.csv
